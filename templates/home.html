@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="">home</a>
+            <a href="">About</a>
+        </div>
+        <div class="body">
+            <h1>todo</h1>
+            <a href="{% url 'about' %}">about</a>
+            <form action="todo" method="POST">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="enter name">
+                <input type="text" name="task" placeholder="enter task">
+                <button type="submit">Submit</button>
+                {{key}}
+            </form>
+            <div class="table">
+                <table>
+                    <tr>
+                        <thead>
+                            <th>numbers</th>
+                            <th>Name</th>
+                            <th>Task</th>
+                            <th>Action</th>
+                        </thead>
+                    </tr>
+                    {% for i in taskV %}
+                    <tr>
+                        <tbody>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{i.Name}}</td>
+                            <td>{{i.task}}</td>
+                            <td><a href="{% url 'deltodo' i.id %}">Delete</a>&nbsp; <a href="{% url 'edit' i.id %}">Edit</a></td>
+                        </tbody>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
